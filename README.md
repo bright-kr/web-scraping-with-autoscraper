@@ -1,47 +1,47 @@
-# Web Scraping with AutoScraper
+# AutoScraper로 Webスクレイピング하기
 
-[![Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.com/)
+[![Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
 
-This guide explains how to use AutoScraper with Python for web scraping:
+이 가이드는 Python에서 AutoScraper를 사용하여 Webスクレイピング하는 방법을 설명합니다:
 
-- [What Is AutoScraper?](#what-is-autoscraper)
-- [Setting up a Project](#setting-up-a-project)
-- [Selecting a Target Website](#selecting-a-target-website)
-- [Scraping Simple Data with AutoScraper](#scraping-simple-data-with-autoscraper)
-- [Extracting Data from Websites with a Complex Design](#extracting-data-from-websites-with-a-complex-design)
-- [Common Challenges with AutoScraper](#common-challenges-with-autoscraper)
+- [AutoScraper란 무엇입니까?](#what-is-autoscraper)
+- [프로젝트 설정](#setting-up-a-project)
+- [대상 웹사이트 선택](#selecting-a-target-website)
+- [AutoScraper로 간단한 데이터 스크레이핑](#scraping-simple-data-with-autoscraper)
+- [복잡한 설계의 웹사이트에서 데이터 추출](#extracting-data-from-websites-with-a-complex-design)
+- [AutoScraper 사용 시 일반적인 과제](#common-challenges-with-autoscraper)
 
 ## What Is AutoScraper?
 
-[AutoScraper](https://github.com/alirezamika/autoscraper) is a Python library that simplifies web scraping by automatically identifying and extracting data from websites based on example queries, eliminating the need for manual HTML inspection. It efficiently handles dynamic websites with minimal setup. Learn more about scraping dynamic websites [here](https://brightdata.com/blog/how-tos/scrape-dynamic-websites-python).
+[AutoScraper](https://github.com/alirezamika/autoscraper)는 예시 쿼리를 기반으로 웹사이트에서 데이터를 자동으로 식별하고 추출하여, 수동 HTML 검사 필요성을 제거함으로써 Webスクレイピング을 단순화하는 Python 라이브러리입니다. 최소한의 설정으로 동적 웹사이트도 효율적으로 처리합니다. 동적 웹사이트 스クレイピング에 대해 더 알아보려면 [여기](https://brightdata.co.kr/blog/how-tos/scrape-dynamic-websites-python)를 확인하십시오.
 
 ## Setting up a Project
 
-Once you have Python 3 or a later version installed, create a project directory and enter it:
+Python 3 또는 그 이후 버전을 설치한 다음, 프로젝트 디렉터리를 생성하고 이동합니다:
 
 ```bash
 mkdir auto-scrape && cd auto-scrape
 ```
 
-Create a virtual environment:
+가상 환경을 생성합니다:
 
 ```bash
 python -m venv env
 ```
 
-Then, activate it. On Linux and macOS:
+그다음 활성화합니다. Linux 및 macOS에서는 다음을 실행합니다:
 
 ```bash
 source env/bin/activate
 ```
 
-On Windows:
+Windows에서는 다음을 실행합니다:
 
 ```powershell
 venv\Scripts\activate
 ```
 
-Install the `autoscraper` and `pandas` libraries:
+`autoscraper` 및 `pandas` 라이브러리를 설치합니다:
 
 ```bash
 pip install autoscraper pandas
@@ -49,15 +49,15 @@ pip install autoscraper pandas
 
 ## Selecting a Target Website
 
-When scraping public websites, make sure you check the site’s Terms of Service (ToS) or `robots.txt` file to ensure the site allows scraping.
+공개 웹사이트를 스크레이핑할 때는 사이트의 Terms of Service(ToS) 또는 `robots.txt` 파일을 확인하여 스크레이ピング이 허용되는지 확인해야 합니다.
 
-This guide assumes scraping data from [Scrape This Site’s Countries of the World: A Simple Example page](https://www.scrapethissite.com/pages/simple/), a beginner-friendly sandbox designed for testing scraping tools.
+이 가이드는 스크레이핑 도구 테스트를 위해 설계된 초보자 친화적 샌드박스인 [Scrape This Site’s Countries of the World: A Simple Example page](https://www.scrapethissite.com/pages/simple/)에서 데이터를 스크레이핑하는 것을 가정합니다.
 
-This page has a simple structure, making it an excellent starting point for learning the basics of data extraction. Once you’re comfortable with the fundamental concepts, we’ll move on to a more complex example—the [Hockey Teams: Forms, Searching, and Pagination page](https://www.scrapethissite.com/pages/forms/).
+이 페이지는 구조가 단순하여 데이터 추출의 기본을 학습하기에 훌륭한 출발점입니다. 기본 개념에 익숙해지면 더 복잡한 예시인 [Hockey Teams: Forms, Searching, and Pagination page](https://www.scrapethissite.com/pages/forms/)로 넘어가겠습니다.
 
 ## Scraping Simple Data with AutoScraper
 
-Use the following script to scrape a list of countries, along with their capital, population, and area:
+다음 스크립트를 사용하여 국가 목록과 함께 수도, 인구, 면적을 스크레이핑합니다:
 
 ```python
 # 1. Import dependencies
@@ -97,21 +97,21 @@ df.to_csv(csv_filename, index=False)
 print(f"Data has been successfully saved to {csv_filename}")
 ```
 
-The above script begins by importing the necessary libraries: AutoScraper and pandas. Next, the target website's URL is defined, followed by the creation of an AutoScraper instance.
+위 스크립트는 필요한 라이브러리인 AutoScraper와 pandas를 임포트하는 것으로 시작합니다. 다음으로 대상 웹사이트의 URL을 정의한 뒤 AutoScraper 인스턴스를 생성합니다.
 
-Here’s where AutoScraper stands out: unlike traditional scrapers that require explicit instructions, such as XPath or CSS selectors, AutoScraper allows you to provide example data. Instead of specifying where elements are located on the page, you simply list a few sample values you want to extract. This list, called the `wanted_list`, contains representative data points—such as a country’s name, capital, population, and area.
+여기서 AutoScraper의 강점이 드러납니다. XPath나 CSS selector와 같은 명시적 지시가 필요한 전통적인 스크레이퍼와 달리, AutoScraper는 예시 데이터를 제공할 수 있습니다. 페이지에서 요소가 어디에 있는지 지정하는 대신, 추출하려는 샘플 값을 몇 개 나열하기만 하면 됩니다. `wanted_list`라고 불리는 이 리스트에는 국가명, 수도, 인구, 면적과 같은 대표 데이터 포인트가 포함됩니다.
 
-Once the `wanted_list` is set, the scraper is built using the provided URL and sample data. AutoScraper then analyzes the webpage, identifies patterns, and generates scraping rules. These rules allow the scraper to recognize and extract similar data from the same or other web pages.
+`wanted_list`를 설정하면 제공된 URL과 샘플 데이터를 사용하여 스크레이퍼를 빌드합니다. 그러면 AutoScraper가 웹페이지를 분석하고 패턴을 식별한 후 스크레이핑 규칙을 생성합니다. 이 규칙을 통해 스크레이퍼는 동일한 또는 다른 웹페이지에서 유사한 데이터를 인식하고 추출할 수 있습니다.
 
-Further down in the script, the `get_result_similar` method is called to retrieve all data matching the patterns AutoScraper has learned. To better understand how the scraper interprets the data structure, the script prints the rule IDs associated with the extracted data. The output should resemble this:
+스크립트의 아래쪽에서는 `get_result_similar` 메서드를 호출하여 AutoScraper가 학습한 패턴과 일치하는 모든 데이터를 가져옵니다. 스크레이퍼가 데이터 구조를 어떻게 해석하는지 더 잘 이해하기 위해, 스크립트는 추출된 데이터와 연결된 rule ID를 출력합니다. 출력은 다음과 유사해야 합니다:
 
 ```
 Keys found by the scraper: dict_keys(['rule_4y6n', 'rule_gghn', 'rule_a6r9', 'rule_os29'])
 ```
 
-Comments eight and nine define column names and structure the extracted data into a pandas DataFrame. Comment ten then saves this data as a CSV file.
+주석 8과 9는 컬럼 이름을 정의하고 추출된 데이터를 pandas DataFrame으로 구조화합니다. 주석 10은 이 데이터를 CSV 파일로 저장합니다.
 
-After running the script (`python script.py`), a `countries_data.csv` file will appear in the project directory with contents like:
+스크립트(`python script.py`)를 실행하면, 프로젝트 디렉터리에 `countries_data.csv` 파일이 생성되며 다음과 같은 내용이 포함됩니다:
 
 ```csv
 Country Name,Capital,Area (sq km),Population
@@ -124,9 +124,9 @@ Zimbabwe,Harare,11651858,390580.0
 
 ## Extracting Data from Websites with a Complex Design
 
-The previous technique may struggle with complex websites like the [Hockey Teams page](https://www.scrapethissite.com/pages/forms/), which features a table with many similar values. Try extracting team names, years, wins, and other fields using the same method to observe the challenge.
+이전 기법은 많은 유사 값이 있는 테이블이 포함된 [Hockey Teams page](https://www.scrapethissite.com/pages/forms/)와 같은 복잡한 웹사이트에서는 어려움을 겪을 수 있습니다. 동일한 방법으로 팀 이름, 연도, 승수 및 기타 필드를 추출해 보면서 어떤 문제가 발생하는지 확인해 보십시오.
 
-Fortunately, AutoScraper supports refining its model by pruning unnecessary rules during the build step. Here’s how you can do that:
+다행히 AutoScraper는 빌드 단계에서 불필요한 rule을 가지치기(pruning)하여 모델을 정교화하는 것을 지원합니다. 방법은 다음과 같습니다:
 
 ```python
 from autoscraper import AutoScraper
@@ -197,37 +197,37 @@ def load_and_run_model():
 # load_and_run_model()
 ```
 
-This script defines three methods: `setup_model`, `prune_rules`, and `load_and_run_model`.
+이 스크립트는 `setup_model`, `prune_rules`, `load_and_run_model`의 세 가지 메서드를 정의합니다.
 
-The `setup_model` method creates a scraper instance, defines a `wanted_list`, builds the scraper, scrapes data from the target URL, prints the collected rule IDs, and saves the model as `teams_model.json` in the project directory.
+`setup_model` 메서드는 스크레이퍼 인스턴스를 생성하고 `wanted_list`를 정의한 다음 스크레이퍼를 빌드합니다. 이후 대상 URL에서 데이터를 스크레이핑하고, 수집된 rule ID를 출력하며, 모델을 `teams_model.json`으로 프로젝트 디렉터리에 저장합니다.
 
-To run the script, uncomment the `# setup_model()` line in the script, save the file (e.g., `script.py`), and run it with `python script.py`.
+스크립트를 실행하려면 스크립트에서 `# setup_model()` 줄의 주석을 해제하고 파일(예: `script.py`)을 저장한 뒤 `python script.py`로 실행하십시오.
 
-The output will look like this:
+출력은 다음과 같이 표시됩니다:
 
 ```
 {'rule_hjk5': ['Boston Bruins', 'Buffalo Sabres', 'Calgary Flames', 'Chicago Blackhawks', 'Detroit Red Wings', 'Edmonton Oilers', 'Hartford Whalers', 'Los Angeles Kings', 'Minnesota North Stars', 'Montreal Canadiens', 'New Jersey Devils', 'New York Islanders', 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins', 'Quebec Nordiques', 'St. Louis Blues', 'Toronto Maple Leafs', 'Vancouver Canucks', 'Washington Capitals', 'Winnipeg Jets', 'Boston Bruins', 'Buffalo Sabres', 'Calgary Flames', 'Chicago Blackhawks'], 'rule_uuj6': ['Boston Bruins', 'Buffalo Sabres', 'Calgary Flames', 'Chicago Blackhawks', 'Detroit Red Wings', 'Edmonton Oilers', 'Hartford Whalers', 'Los Angeles Kings', 'Minnesota North Stars', 'Montreal Canadiens', 'New Jersey Devils', 'New York Islanders', 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins', 'Quebec Nordiques', 'St. Louis Blues', 'Toronto Maple Leafs', 'Vancouver Canucks', 'Washington Capitals', 'Winnipeg Jets', 'Boston Bruins', 'Buffalo Sabres', 'Calgary Flames', 'Chicago Blackhawks'], 'rule_9sty': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_9nie': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_41rr': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_ufil': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_ere2': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_w0vo': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_rba5': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_rmae': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_ccvi': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_3c34': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_4j80': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_oc36': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_93k1': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_d31n': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_ghh5': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_5rne': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_4p78': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_qr7s': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_60nk': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_wcj7': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_0x7y': ['1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1990', '1991', '1991', '1991', '1991'], 'rule_2hml': ['44', '31', '46', '49', '34', '37', '31', '46', '27', '39', '32', '25', '36', '33', '41', '16', '47', '23', '28', '37', '26', '36', '31', '31', '36'], 'rule_swtb': ['24'], 'rule_e8x1': ['0.55', '14', '0.575', '0.613', '-25', '0', '-38', '0.575', '-10', '24', '8', '-67', '32', '-15', '0.512', '-118', '0.588', '-77', '-72', '0', '-28', '-5', '-10', '-9', '21'], 'rule_3qvv': ['24', '30', '26', '23', '38', '37', '38', '24', '39', '30', '33', '45', '31', '37', '33', '50', '22', '46', '43', '36', '43', '32', '37', '37', '29'], 'rule_n07w': ['24', '30', '26', '23', '38', '37', '38', '24', '39', '30', '33', '45', '31', '37', '33', '50', '22', '46', '43', '36', '43', '32', '37', '37', '29'], 'rule_qmem': ['0.55', '0.388', '0.575', '0.613', '0.425', '0.463', '0.388', '0.575', '0.338', '0.487', '0.4', '0.312', '0.45', '0.412', '0.512', '0.2', '0.588', '0.287', '0.35', '0.463', '0.325', '0.45', '0.388', '0.388', '0.45'], 'rule_b9gx': ['264', '278', '263', '211', '298', '272', '276', '254', '266', '249', '264', '290', '265', '267', '305', '354', '250', '318', '315', '258', '288', '275', '299', '305', '236'], 'rule_mhl4': ['299', '292', '344', '284', '273', '272', '238', '340', '256', '273', '272', '223', '297', '252', '342', '236', '310', '241', '243', '258', '260', '270', '289', '296', '257'], 'rule_24nt': ['264', '278', '263', '211', '298', '272', '276', '254', '266', '249', '264', '290', '265', '267', '305', '354', '250', '318', '315', '258', '288', '275', '299', '305', '236'], 'rule_h090': ['264', '278', '263', '211', '298', '272', '276', '254', '266', '249', '264', '290', '265', '267', '305', '354', '250', '318', '315', '258', '288', '275', '299', '305', '236'], 'rule_xg34': ['35', '14', '81', '73', '-25', '0', '-38', '86', '-10', '24', '8', '-67', '32', '-15', '37', '-118', '60', '-77', '-72', '0', '-28', '-5', '-10', '-9', '21']}
 ```
 
-This output shows the data collected by AutoScraper in its `get_result_similar` call from the target website. It contains duplicates because AutoScraper attempts to infer relationships and group data into rules. When it groups correctly, data can be easily extracted from similar sites.
+이 출력은 대상 웹사이트에서 `get_result_similar` 호출을 통해 AutoScraper가 수집한 데이터를 보여줍니다. AutoScraper는 관계를 추론하고 데이터를 rule로 그룹화하려고 시도하기 때문에 중복이 포함됩니다. 올바르게 그룹화되면, 유사한 사이트에서도 데이터를 쉽게 추출할 수 있습니다.
 
-However, AutoScraper struggles with this site due to many numbers, leading to numerous incorrect correlations and a large dataset with duplicates.
+그러나 이 사이트는 숫자가 많아 AutoScraper가 어려움을 겪으며, 그 결과 잘못된 상관관계가 다수 발생하고 중복이 포함된 큰 데이터셋이 생성됩니다.
 
-To proceed, analyze the data and select the rules with the correct data (i.e., matching the data from one column in the correct order). In this case, the following rules contained the right data (determined by verifying that each rule contained 25 data points, corresponding to the number of rows on the target page):
+계속 진행하려면 데이터를 분석하고 올바른 데이터(즉, 올바른 순서로 하나의 컬럼 데이터와 일치하는 데이터)를 가진 rule을 선택해야 합니다. 이 경우, 다음 rule들이 올바른 데이터를 포함하고 있었습니다(각 rule에 대상 페이지의 행 수에 해당하는 25개 데이터 포인트가 들어 있는지 검증하여 판단했습니다):
 
 ```
 ['rule_hjk5', 'rule_9sty', 'rule_2hml', 'rule_3qvv', 'rule_e8x1', 'rule_mhl4', 'rule_h090', 'rule_xg34']
 ```
 
-Update the `prune_rules` method. Then, comment out the `setup_model()` line and uncomment the `prune_rules()` line in the script. When you run it, it loads the model from `teams_model.json`, removes unnecessary rules, and saves the updated model. You can inspect the contents of `teams_model.json` to verify the stored rules.
+`prune_rules` 메서드를 업데이트하십시오. 그런 다음 스크립트에서 `setup_model()` 줄을 주석 처리하고 `prune_rules()` 줄의 주석을 해제하십시오. 실행하면 `teams_model.json`에서 모델을 로드하고 불필요한 rule을 제거한 뒤 업데이트된 모델을 저장합니다. `teams_model.json`의 내용을 확인하여 저장된 rule을 검증할 수 있습니다.
 
-Next, to run the `load_and_run_model` method, comment out the `prune_rules` lines, uncomment the `load_and_run_model` line, and rerun the script. This will extract and save the correct data in `teams_data.csv` in the project directory, along with printing the following output:
+다음으로 `load_and_run_model` 메서드를 실행하려면, `prune_rules` 줄을 주석 처리하고 `load_and_run_model` 줄의 주석을 해제한 뒤 스크립트를 다시 실행하십시오. 그러면 프로젝트 디렉터리의 `teams_data.csv`에 올바른 데이터가 추출되어 저장되며, 다음 출력도 표시됩니다:
 
 ```
 Data has been successfully saved to teams_data.csv
 ```
 
-Here’s what the `teams_data.csv` file looks like after a successful run:
+성공적으로 실행한 뒤 `teams_data.csv` 파일은 다음과 같습니다:
 
 ```csv
 Team Name,Year,Wins,Losses,Win %,Goals For (GF),Goals Against (GA),+/-
@@ -238,13 +238,13 @@ Calgary Flames,1991,31,-9,37,296,305,-9
 Chicago Blackhawks,1991,36,21,29,257,236,21
 ```
 
-All the code developed in this article is available in [this GitHub repo](https://github.com/krharsh17/auto-scrape).
+이 글에서 개발된 모든 코드는 [this GitHub repo](https://github.com/krharsh17/auto-scrape)에서 확인할 수 있습니다.
 
 ## Common Challenges with AutoScraper
 
-AutoScraper is great for simple use cases with small datasets and distinct data points. However, it can be cumbersome for more complex scenarios, like scraping tables. It also doesn’t support JavaScript rendering, so you'll need to integrate it with tools like [Splash](https://pypi.org/project/splash/), Selenium, or Puppeteer.
+AutoScraper는 작은 データセット과 뚜렷한 데이터 포인트가 있는 단순한 사용 사례에 매우 적합합니다. 하지만 테이블을 스크레이핑하는 것과 같은 더 복잡한 시나리오에서는 번거로울 수 있습니다. 또한 JavaScript 렌더링을 지원하지 않으므로, [Splash](https://pypi.org/project/splash/), Selenium 또는 Puppeteer 같은 도구와 통합해야 합니다.
 
-If you face issues like IP blocks or need custom headers, AutoScraper allows you to specify additional request parameters for its requests module, like this:
+IP 차단 문제가 발생하거나 커스텀 ヘッダー가 필요한 경우, AutoScraper는 requests 모듈의 リクエスト에 대해 다음과 같이 추가 リクエスト パラメータ를 지정할 수 있습니다:
 
 ```python
 # build the scraper on an initial URL
@@ -255,7 +255,7 @@ scraper.build(
 )
 ```
 
-For example, here’s how you can set a custom user agent and a proxy for scraping with AutoScraper:
+예를 들어, AutoScraper로 스크레이핑할 때 커스텀 user agent와 プロキシ를 설정하는 방법은 다음과 같습니다:
 
 ```python
 request_args = { 
@@ -275,8 +275,8 @@ scraper.build(
 )
 ```
 
-AutoScraper uses Python's requests library and doesn’t support rate-limiting. To handle rate-limiting, you can manually implement throttling or use a prebuilt solution like the [`ratelimit`](https://pypi.org/project/ratelimit/) library.
+AutoScraper는 Python의 requests 라이브러리를 사용하며 レート制限을 지원하지 않습니다. レート制限을 처리하려면 수동으로 스로틀링(throttling)을 구현하거나, 미리 만들어진 솔루션인 [`ratelimit`](https://pypi.org/project/ratelimit/) 라이브러리를 사용할 수 있습니다.
 
-Since AutoScraper works only with non-dynamic websites, it cannot handle CAPTCHA-protected sites. For these cases, consider using a more robust solution like the [Bright Data Web Scraping API](https://brightdata.com/products/web-scraper), which supports structured data extraction from sites like LinkedIn, Amazon, and Zillow.
+AutoScraper는 비동적 웹사이트에서만 동작하므로 CAPTCHA로 보호된 사이트를 처리할 수 없습니다. 이러한 경우에는 LinkedIn, Amazon, Zillow와 같은 사이트에서 구조화된 데이터 추출을 지원하는 [Bright Data Web Scraping API](https://brightdata.co.kr/products/web-scraper)와 같은 보다 강력한 솔루션을 고려하십시오.
 
-Sign up now and start exploring Bright Data’s products, including a free trial!
+지금 가입하고 무료 체험을 포함한 Bright Data의 제품을 탐색해 보십시오!
