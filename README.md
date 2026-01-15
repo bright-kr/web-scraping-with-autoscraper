@@ -1,8 +1,8 @@
-# AutoScraper로 Webスクレイピング하기
+# AutoScraper로 Web스크레이핑하기
 
 [![Promo](https://github.com/bright-kr/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
 
-이 가이드는 Python에서 AutoScraper를 사용하여 Webスクレイピング하는 방법을 설명합니다:
+이 가이드는 Python에서 AutoScraper를 사용하여 Web스크레이핑하는 방법을 설명합니다:
 
 - [AutoScraper란 무엇입니까?](#what-is-autoscraper)
 - [프로젝트 설정](#setting-up-a-project)
@@ -13,7 +13,7 @@
 
 ## What Is AutoScraper?
 
-[AutoScraper](https://github.com/alirezamika/autoscraper)는 예시 쿼리를 기반으로 웹사이트에서 데이터를 자동으로 식별하고 추출하여, 수동 HTML 검사 필요성을 제거함으로써 Webスクレイピング을 단순화하는 Python 라이브러리입니다. 최소한의 설정으로 동적 웹사이트도 효율적으로 처리합니다. 동적 웹사이트 스クレイピング에 대해 더 알아보려면 [여기](https://brightdata.co.kr/blog/how-tos/scrape-dynamic-websites-python)를 확인하십시오.
+[AutoScraper](https://github.com/alirezamika/autoscraper)는 예시 쿼리를 기반으로 웹사이트에서 데이터를 자동으로 식별하고 추출하여, 수동 HTML 검사 필요성을 제거함으로써 Web스크레이핑을 단순화하는 Python 라이브러리입니다. 최소한의 설정으로 동적 웹사이트도 효율적으로 처리합니다. 동적 웹사이트 스クレイピング에 대해 더 알아보려면 [여기](https://brightdata.co.kr/blog/how-tos/scrape-dynamic-websites-python)를 확인하십시오.
 
 ## Setting up a Project
 
@@ -242,9 +242,9 @@ Chicago Blackhawks,1991,36,21,29,257,236,21
 
 ## Common Challenges with AutoScraper
 
-AutoScraper는 작은 データセット과 뚜렷한 데이터 포인트가 있는 단순한 사용 사례에 매우 적합합니다. 하지만 테이블을 스크레이핑하는 것과 같은 더 복잡한 시나리오에서는 번거로울 수 있습니다. 또한 JavaScript 렌더링을 지원하지 않으므로, [Splash](https://pypi.org/project/splash/), Selenium 또는 Puppeteer 같은 도구와 통합해야 합니다.
+AutoScraper는 작은 데이터셋과 뚜렷한 데이터 포인트가 있는 단순한 사용 사례에 매우 적합합니다. 하지만 테이블을 스크레이핑하는 것과 같은 더 복잡한 시나리오에서는 번거로울 수 있습니다. 또한 JavaScript 렌더링을 지원하지 않으므로, [Splash](https://pypi.org/project/splash/), Selenium 또는 Puppeteer 같은 도구와 통합해야 합니다.
 
-IP 차단 문제가 발생하거나 커스텀 ヘッダー가 필요한 경우, AutoScraper는 requests 모듈의 リクエスト에 대해 다음과 같이 추가 リクエスト パラメータ를 지정할 수 있습니다:
+IP 차단 문제가 발생하거나 커스텀 헤더가 필요한 경우, AutoScraper는 requests 모듈의 요청에 대해 다음과 같이 추가 요청 매개변수를 지정할 수 있습니다:
 
 ```python
 # build the scraper on an initial URL
@@ -255,7 +255,7 @@ scraper.build(
 )
 ```
 
-예를 들어, AutoScraper로 스크레이핑할 때 커스텀 user agent와 プロキシ를 설정하는 방법은 다음과 같습니다:
+예를 들어, AutoScraper로 스크레이핑할 때 커스텀 user agent와 프록시를 설정하는 방법은 다음과 같습니다:
 
 ```python
 request_args = { 
@@ -275,7 +275,7 @@ scraper.build(
 )
 ```
 
-AutoScraper는 Python의 requests 라이브러리를 사용하며 レート制限을 지원하지 않습니다. レート制限을 처리하려면 수동으로 스로틀링(throttling)을 구현하거나, 미리 만들어진 솔루션인 [`ratelimit`](https://pypi.org/project/ratelimit/) 라이브러리를 사용할 수 있습니다.
+AutoScraper는 Python의 requests 라이브러리를 사용하며 속도 제한을 지원하지 않습니다. 속도 제한을 처리하려면 수동으로 스로틀링(throttling)을 구현하거나, 미리 만들어진 솔루션인 [`ratelimit`](https://pypi.org/project/ratelimit/) 라이브러리를 사용할 수 있습니다.
 
 AutoScraper는 비동적 웹사이트에서만 동작하므로 CAPTCHA로 보호된 사이트를 처리할 수 없습니다. 이러한 경우에는 LinkedIn, Amazon, Zillow와 같은 사이트에서 구조화된 데이터 추출을 지원하는 [Bright Data Web Scraping API](https://brightdata.co.kr/products/web-scraper)와 같은 보다 강력한 솔루션을 고려하십시오.
 
